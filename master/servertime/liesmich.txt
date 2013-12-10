@@ -1,0 +1,289 @@
+servertime class liesmich.txt doc file
+Peter Klauer, 7. September 2003
+knito@knito.de
+
+Änderungen:
+26. Oktober   2003: Optionaler Start aus dem Body-Tag mit onload="clock()"
+                    (s. Synchronisierung)
+ 3. Oktober   2003: Neues Feature $offset_hours. Idee von Martin Link.
+ 1. Oktober   2003: Neue Sprache "french" von Eric Mathieu
+25. September 2003: Neuer Schalter $ucaseampm für groß- oder kleingeschriebenes
+                    am/pm. Neues Feature: Alarmzeiten und Ausgabe von 
+                    Alarmmeldungen über eine benutzerdefinierbare php-Seite.
+                    Neue Variablen: $alarmon, $alarmdate, $alarm, $onalarm, 
+                    $alarmpage. Ideen und Codeanregungen von Paul Hargreaves.
+10. September 2003: Neue Schalter military und showdate von Paul Hargreaves
+11. September 2003: Neuer Abschnitt "Synchronisierung"
+
+Folgende Themen werden in diesem Dokument behandelt:
+
+Klassenfunktionen
+Klassenvariablen
+Beispiel
+Synchronisierung
+
+Die Klasse heisst "Servertime" und zeigt annähernd die Zeit des Servers, von 
+welchem aus sie gestartet wurde. Wenn $offset_hours definiert wurde, wird Zeit
+und Datum plus $offset_hours gezeigt. Javascript muss beim Client aktiviert sein, 
+damit die Uhr funktioniert. Die Zeit wird digital als Text innerhalb eines <div>
+Tags dargestellt. Die Serverzeit wird nicht in Echtzeit angezeigt: Bis zur
+Übernahme der Zeit und dem Start der Uhr vergeht, abhängig von der Komplexität
+der Seite, eine gewisse Zeitspanne. Danach läuft die Uhr mit lokaler Geschwindig-
+keit weiter. Bitte lesen Sie dazu den letzten Abschnitt "Synchronisierung".
+
+Das Feature "Alarmzeiten" erlaubt, für verschiedene Tage und Uhrzeiten bestimmte
+Ereignisse anzukündigen. So kann z.B. eine Seite eines Sportvereins abhängig
+von den Alarmzeiten online den aktuellen Beginn eines Heimspiels ankündigen. 
+
+Auf der Seite
+http://www.ingoknito.de/scripts/servertime/index.php
+können Sie ein paar Einstellungen der Klasse testen.
+
+********************************************************************************
+********************************************************************************
+Klassenfunktionen in servertime:
+********************************************************************************
+********************************************************************************
+
+InstallClockHead()
+InstallClock()
+InstallClockBody()
+Help()
+
+********************************************************************************
+function servertime::InstallClockHead()
+********************************************************************************
+
+Diese Funktion muss in der <head>-Sektion der Seite untergebracht werden. Sie
+installiert das Array mit den Monatsnamen, den Startwert für die Zeitvariable
+"digital", der die aktuelle Zeit vom Server erhält und eine ziemlich weit
+verbreitete Funktion "writeLayer", die den Inhalt der Uhr in die Seite schreibt.
+Ich fand diese Funktion an mehreren Stellen und kann nicht mehr sagen, wo ich
+sie her habe.
+
+Bei
+http://beta.experts-exchange.com/Web/Web_Languages/JavaScript/Q_20631686.html
+
+werden Sie eine ähnliche Funktion finden, aber von dort habe ich sie nicht.
+Mit der Javascript Console vom Mozilla wurde die Funktion und die Klasse so
+lange überarbeitet, bis keine Warnungen mehr erschienen. Die Klasse erzeugt
+keinen einzigen Eintrag in der Javascript Console, wenn sie korrekt installiert
+ist.
+
+Die folgenden Klassenvariablen veranlassen InstallClockHead() dazu, etwas zu tun:
+
+language shorthmonth showdate onalarm alarmon offset_hours
+
+Die folgende Variable wird auf TRUE gesetzt, wenn InstallClockHead() läuft:
+
+ok_head
+
+********************************************************************************
+function servertime::InstallClock()
+********************************************************************************
+
+Diese Funktion wird dort platziert, wo die Uhr erscheinen soll. Sie muss nach
+InstallClockHead() und vor InstallClockBody() gesetzt werden.
+
+Die folgenden Klassenvariablen veranlassen InstallClockHead() dazu, etwas zu tun:
+
+divclass divstyle divtag divid title ok_head
+onalarm alarmon alarmpage alarmpagew alarmpageh alarmpageopts
+
+Die folgende Variable wird auf TRUE gesetzt, wenn InstallClock() läuft:
+
+ok_clock
+
+********************************************************************************
+function servertime::InstallClockBody()
+********************************************************************************
+
+Diese Funktion muss dicht ans Ende der Seite gesetzt werden. Sie installiert
+die Javascript Funktion "clock()" und den ersten Aufruf dieser Funktion.
+Eine der Verbesserungen dieser Klasse gegenüber dem alten Skript ist, dass kein
+Kickstarter im <body>-Tag mehr gebraucht wird: <body onload="clock()"> ist
+nicht mehr erforderlich.
+
+
+Die folgenden Klassenvariablen veranlassen InstallClockHead() dazu, etwas zu tun:
+
+language military showdate ok_head ok_clock
+alarm alarmon onalarm alarmdate ucaseampm
+
+********************************************************************************
+function servertime::Help()
+********************************************************************************
+
+Das ist nur eine kleine Extrafunktion für den Fall, dass diese liesmich.txt-
+Datei verloren gegangen ist. 
+
+********************************************************************************
+********************************************************************************
+Klassenvariablen
+********************************************************************************
+********************************************************************************
+
+divid        string    Enthält den id-Namen des Uhren-Tags.
+                       'Pendule' ist der Vorgabewert.
+                           
+divstyle     string    Enthält den Vorgabewert für den css-Style-String für den
+                       Uhren-Tag.
+                       'position:absolute;' ist der Vorgabewert, damit auch der
+                       NS 4.7 funktioniert. Ich glaube, das ist veraltet und
+                       kann mit '' überschrieben werden. Tatsächlich veranlasst
+                       dieser Vorgabewert manche Browser dazu, die nächste der
+                       Uhr folgenden Zeile zu überschreiben, wenn dieser Vorgabe-
+                       wert beibehalten wird. Aber ich bin noch nicht bereit,
+                       den NS 4.7 aus der Liste der unterstützten Browser zu
+                       streichen. Sie können es selbst tun, indem Sie den Wert
+                       '' hier einsetzen. 
+divtag       string    Hält die "Rasse" des Html-Tags. Vorgabe ist 'div',
+                       aber 'span' wäre auch denkbar.
+divclass     string    Kann einen Klassennamen für den divtag aufnehmen. Diese
+                       Klasse muss in einem externen Style Sheet oder in der
+                       <head>-Sektion der Seite definiert werden. Vorgabewert
+                       ist ein leerer String '': Keine Klasse definiert.
+title        string    Das ist ein kurzer Text der der Zeit vorangestellt wird.    
+                       'Serverzeit: ' ist der Vorgabewert.
+                       Sie können hier alles mögliche eintragen.
+                       Mein Tipp: Ein Leerstring ''
+language     string    Enthält die Spracheinstellung für das Datumsformat und
+                       die Monatsnamen. 'german' (deutsch) ist der Vorgabewert. Andere
+                       Sprachen sind 'french' für französisch und 'english' für
+                       englisch.    
+shortmonth   bool      Wenn TRUE, dann werden die Monatsnamen nur noch 3 Zeichen
+                       lang dargestellt. Wenn FALSE, dann wird der ganze Monats-
+                       name angezeigt. FALSE ist der Vorgabewert.
+military     bool      Wenn TRUE, dann wird die Zeit im 24-Stunden-Format
+                       angezeigt. Bei FALSE im 12-Stunden-Format. Ist die
+                       "language" nicht "german", dann wird "am" oder "pm"
+                       angehängt. Vorgabe: TRUE.
+showdate     bool      Wenn TRUE, dann wird Tag, Monat und Jahr gezeigt. Bei
+                       FALSE wird kein Datum angezeigt. Vorgabe: TRUE                                              
+ucaseampm    bool      Soll am/pm in Großbuchstaben gezeigt werden?
+                       Vorgabe ist TRUE.
+                             
+alarm        array     Array von Zeit-Werten im 24h (military) Format, die 
+                       entweder ohne Datum oder mit Datum sind. Wenn das Datum
+                       dabei ist, dann ist das Format "JJJJ-MM-DD HH:mm".
+                       
+                       Grundformat für Einträge ist:
+                       
+                          $st->alarm['HH:mm'] = 'Anzuzeigende Meldung';
+                       
+                       Beispiel: 
+                       
+                       mit Datum (alarmdate = true)
+                       
+                          $st->alarm["2003-09-19 01:25"] = "1st+alarm";
+                       
+                       ohne Datum (alarmdate = false)
+                       
+                          $st->alarm["01:25"] = "1st+alarm";
+                       
+alarmdate    bool      Hinweis für die Klasse, dass das Array "alarm" Datums-
+                       einträge enthält, wenn auf TRUE. Vorgabe = FALSE.
+alarmon      bool      Die Klasse versucht, Alarmmeldungen anzuzeigen, wenn TRUE.
+                       Vorgabe = FALSE.
+onalarm      string    Name einer Javascript-Alarm-Funktion. Vorgabe ist die
+                       Funktion der Klasse "doAlarm", aber es darf auch eine
+                       eigene Funktion, die außerhalb der Klasse definiert wird,
+                       angegeben werden.
+alarmpage    string    Name einer Seite, die die Alarmmeldung ausgeben wird und
+                       von doAlarm() geladen wird. Vorgabe: "alarm.php". Wenn
+                       alarmon TRUE ist und onalarm gleich "doAlarm", dann wird
+                       die Seite "alarmpage" gesucht und der Skript abgebrochen,
+                       wenn diese Seite nicht gefunden wird.
+alarmpagew   integer   Breite der Alarmseite in Pixel. Vorgabe: 200.
+alarmpageh   integer   Höhe der Alarmseite in Pixel. Vorgabe: 200.
+alarmpageopts string   Zusatzoptionen. Vorgabe: "scrollbars=yes, resizable=yes"
+offset_hours integer   Diese Variable verändert den Stundenwert der Anzeige.
+                       Eine beliebige (vernünftige) Integerzahl darf hier 
+                       angegeben werden (positiv oder negativ). Der Datumsanteil 
+                       der Ausgabe wird bei Bedarf geändert. Vorgabewert ist 0.
+bodyonload   bool      Die Variable MUSS NUR DANN auf true gesetzt werden, wenn 
+                       die Javascript-Funktion clock() vom Programmierer bereits 
+                       im <body>-Tag mit <body onload="clock()"> aufgerufen 
+                       wurde. Dann wird der Aufruf von clock() in 
+                       InstallClockBody() unterdrückt.
+                        
+                       Fehlerbild 1: Die Uhr läuft mit doppelter
+                       Geschwindigkeit, wenn das Setzen dieser Variable
+                       vergessen wurde und <body onload="clock()"> benutzt wurde.
+                        
+                       Fehlerbild 2: Die Uhr läuft überhaupt nicht, wenn die
+                       Variable auf true gesetzt wurde, aber der Start der
+                       Funktion clock() im <body onload="clock()"> vergessen
+                       wurde. 
+                       Vorgabewert: False.                                              
+                       
+ok_head      bool      Nicht anfassen. Das ist ein Versuch, die Installation der
+                       Klasse zu vereinfachen.
+ok_clock     bool      Nicht anfassen. Das ist ein Versuch, die Installation der
+                       Klasse zu vereinfachen.
+                                               
+                     
+********************************************************************************
+********************************************************************************
+Beispiel:
+********************************************************************************
+********************************************************************************
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Test Servertime Klasse</title>
+<?php
+
+include 'inc_servertime.php';
+$st = new servertime;
+
+$st->InstallClockHead();
+
+?>
+</head>
+<body>
+<?
+$st->InstallClock();
+
+$st->InstallClockBody();
+?>
+</body>
+</html>
+
+********************************************************************************
+********************************************************************************
+Synchronisierung:
+********************************************************************************
+********************************************************************************
+Zunächst erhält Servertime die Serverzeit. Javascript wird dann gestartet, wenn 
+die gesamte Webseite geladen ist. Das kann zu Verzögerungen führen, bis die Uhr 
+dann losläuft. Wenn die Uhr endlich läuft, dann läuft sie mit der 
+Geschwindigkeit, die der Rechner des Surfers hat. Meistens haben die 
+Heimarbeitsplätze den Wunsch, die Uhr wieder einzuholen. 
+Sie schaffen etwa 5 Minuten pro Stunde. 
+Um vor- oder nachgehende Heimstationen wieder mit der Serverzeit des Servers 
+abzugleichen, ist es eine gute Idee, den Skript alle paar Minuten (dieses
+Beispiel hier tut es alle 2 Minuten) per 
+
+<meta http-equiv="refresh" content="120" /> 
+
+wieder mit dem Server in Gleichklang zu bringen. Die Zeile 
+<meta http-equiv="refresh" content="120" /> muss im <head>-Abschnitt der Seite
+untergebracht werden. Beachten Sie bitte, dass beim Neuladen der Seite der
+Benutzer durch ein eventuelles "Springen" an den Seitenanfang in seiner
+Betrachtung der Seite gestört werden könnte.
+
+Schnellere Startzeiten kann man unter Umständen erzielen, indem man den Start
+der Javascript-Uhr mit dem Aufruf der Funktion clock() im <body>-Tag der Seite
+per <body onload="clock()"> erzwingt. Dann muss der Klasse noch mitgeteilt
+werden, dass der Aufruf bereits erfolgt ist, sonst läuft die doppelt so
+schnell! Für den <body onload...> müsste das obige Beispiel so abgeändert
+werden:
+
+...
+<body onload="clock()">
+<?
+$st->bodyonload = true;
+$st->InstallClock();
+...
+ 

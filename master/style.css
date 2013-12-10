@@ -1,0 +1,200 @@
+body         { font-family: Tahoma; color: #000000; font-size: 10pt }
+
+a            { color: blue; text-decoration: none }
+
+a:hover      { color: red; text-decoration: underline }
+
+.detail      { color: white; text-decoration: underline }
+
+td           { color: black; font-family: Tahoma; font-size: 8pt; font-weight: normal }
+
+td.NON    { color: silver; font-family: Arial; font-size: 8pt; font-weight: normal }
+
+td.TOP    { color: red; font-family: Arial; font-size: 8pt; font-weight: normal }
+
+td.Some    { color: navy; font-family: Arial; font-size: 8pt; font-weight: normal }
+
+A.NOEVENT
+
+{
+
+    COLOR: white;
+
+    FONT-FAMILY: Tahoma;
+
+    TEXT-DECORATION: none
+
+}
+
+A.TODAY
+
+{
+
+    FONT-WEIGHT: bold;
+
+    COLOR: red;
+
+    FONT-FAMILY: Arial Black;
+
+    TEXT-DECORATION: italic;
+
+}
+
+a.NOEVENT:link   { color: blue; text-decoration: none }
+
+A.EVENT:link	 { color: red; text-decoration: none }
+
+.LeftNavOff {
+
+	BACKGROUND-COLOR: #CCCCFF; 
+
+	border-left:1 solid white; border-top: 1 solid white; border-bottom: 1 solid silver; border-right: 1 solid silver;
+
+	COLOR: black; CURSOR: hand; 
+
+	FONT-FAMILY: Arial; FONT-SIZE: 8pt; FONT-WEIGHT: normal; LETTER-SPACING: 0pt; LINE-HEIGHT: 15px; 
+
+	MARGIN: 0px 0px; PADDING-BOTTOM: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 0px; PADDING-TOP: 2px; 
+
+	TEXT-DECORATION: none; WIDTH: 100%
+
+}
+
+.LeftNavUp {
+
+	BACKGROUND-COLOR: navy; 
+
+	border-left:1 solid gray; border-top: 1 solid gray; border-bottom: 1 solid white; border-right: 1 solid white;
+
+	COLOR: #FFFFFF; CURSOR: hand; 
+
+	FONT-FAMILY: Arial; FONT-SIZE: 9pt; FONT-WEIGHT: normal; LETTER-SPACING: 0pt; LINE-HEIGHT: 15px; 
+
+	MARGIN: 0px 0px; PADDING-BOTTOM: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 0px; PADDING-TOP: 2px; 
+
+	TEXT-DECORATION: none; WIDTH: 100%
+
+}
+
+.LeftNavDown {
+
+	BACKGROUND-COLOR: red; 
+
+	border-left:1 solid gray; border-top: 1 solid gray; border-bottom: 1 solid white; border-right: 1 solid white;
+
+	COLOR: #FFFFFF; CURSOR: hand; 
+
+	FONT-FAMILY: Arial; FONT-SIZE: 9pt; FONT-WEIGHT: normal; LETTER-SPACING: 0pt; LINE-HEIGHT: 15px; 
+
+	MARGIN: 0px 0px; PADDING-BOTTOM: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 0px; PADDING-TOP: 2px; 
+
+	TEXT-DECORATION: none; WIDTH: 100%
+
+}
+
+.form_isian {
+
+	BACKGROUND-COLOR: #EAEAEA; 
+
+	border-bottom: 1 SOLID silver; border-right: 1 SOLID white;border-left: 1 SOLID white; border-top: 1 SOLID white;
+
+	FONT-FAMILY: Arial; FONT-SIZE: 9pt; FONT-WEIGHT: normal; color:blue;
+
+	PADDING-BOTTOM: 2px; PADDING-TOP: 1px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; 
+
+}
+
+.tombol {
+
+	BACKGROUND-COLOR: #DF0028; 
+
+	border-bottom: 1 SOLID #DF0028; border-left: 0 SOLID gray; border-right: 1 solid #DF0028;border-top: 0 SOLID white;
+
+	FONT-FAMILY: Verdana; FONT-SIZE: 8pt; FONT-WEIGHT: normal;color: white;
+
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; 
+
+}
+
+.tombol_oke {
+
+	BACKGROUND-COLOR: GREEN; 
+
+	border-bottom: 1 SOLID green; border-left: 0 SOLID gray; border-right: 1 solid green;border-top: 0 SOLID white;
+
+	FONT-FAMILY: Verdana; FONT-SIZE: 8pt; FONT-WEIGHT: normal;color: white;
+
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; 
+
+}
+
+
+
+/* WYSIWYG EDITOR */
+
+
+
+/* Toolbar */
+
+.toolbar1   { border: 1px solid #666666; height: 26px; background-image: url(../icons/background_silver.jpg); }
+
+.toolbar2   { border: 1px solid #666666; height: 24px; background-image: url(../icons/background_silver.jpg); border-bottom: 0px; border-top: 0px; }
+
+
+
+/* Command Buttons */
+
+.button     { width: 20px; height: 20px; border: 0px solid transparent; margin: 1px; padding: 0px; background: transparent; }
+
+.buttonOver { width: 20px; height: 20px; border: 1px solid #999999; margin: 0; padding: 0px; }
+
+
+
+
+
+/* Font Type and Size Drop Down */
+
+.dropdown          { background-color: #FFFFFF; border: 1px solid #333333; height: 140px; overflow: auto; padding: 1px; }
+
+button.mouseOver   { background-color: #EEEEEE; border: 1px solid #CCCCCC; padding: 3px; cursor: default; text-align: left;}
+
+button.mouseOut    { background-color: #FFFFFF; border: 1px solid #FFFFFF; padding: 3px; cursor: default; text-align: left;}
+
+
+
+
+
+
+
+
+
+/* CREATE TABLE POPUP */
+
+
+
+/* Select Border Width/Type */
+
+.on   { background-color: #EEEEEE; border: 1px solid #CCCCCC; padding: 6px; width: 140px; cursor: default; height: 5px;}
+
+.off  { background-color: #FFFFFF; border: 1px solid #FFFFFF; padding: 6px; width: 140px; cursor: default; height: 5px;}
+
+
+
+/* Select Shading/Border Color */
+
+.selectColorTable  { border: 1px solid #7E7E81; background-color: #F7F7F7; padding: 1px; }
+
+.selectColorBorder { border: 1px solid #F7F7F7; }
+
+.selectColorOn     { border: 1px solid #999999; background-color: #CCCCCC; }
+
+.selectColorOff    { border: 1px solid #F7F7F7; background-color: #F7F7F7; }
+
+.selectColorBox    { border: 1px solid #FFFFFF; font-size: 1px; height: 13px; width: 13px; }
+
+
+
+
+
+/* END OF WYSIWYG */
+
