@@ -1,7 +1,7 @@
 <?
 $host ="localhost";
     $user="root";
-    $password="penunggu";
+    $password="";
     $database="erwin_nanang";
     $dbh1 = mysql_connect($host,$user,$password) or die("Koneksi server gagal");
     mysql_select_db($database);
